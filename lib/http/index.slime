@@ -96,6 +96,12 @@ html
             |
               $ http #{params.host}/city
               #{params.data.city}
+        = if Map.has_key?(params.data, :latitude) and Map.has_key?(params.data, :longitude) do
+          h2 Location lookup
+          pre
+            |
+              $ http #{params.host}/coordinates
+              #{params.data.latitude},#{params.data.longitude}
       .pure-u-1.pure-u-md-1-2
         h2 JSON output
         pre
