@@ -27,13 +27,15 @@ See [Configuration](#configuration).
 
 4. Run!
 ```
-sudo mix run --no-halt
+mix run --no-halt
 ```
 
 or
 ```
-sudo iex -S mix
+iex -S mix
 ```
+
+The application will start listening on ports: 8080 (HTTP) and 8433 (HTTPS).
 
 ## Configuration
 
@@ -60,7 +62,7 @@ You need to enter the paths to certificate file and private key file inside
 
 ```
 Plug.Cowboy.child_spec(scheme: :https, plug: Ipaddr.Router, options: [
-  port: 443,
+  port: 8443,
   certfile: "/etc/letsencrypt/live/ipaddr.tools/fullchain.pem",
   keyfile: "/etc/letsencrypt/live/ipaddr.tools/privkey.pem",
 ]),

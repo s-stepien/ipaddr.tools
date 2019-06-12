@@ -13,13 +13,13 @@ defmodule Ipaddr.Application do
     children = [
       # HTTPS server specification
       Plug.Cowboy.child_spec(scheme: :https, plug: Ipaddr.Router, options: [
-        port: 443,
+        port: 8443,
         certfile: "/etc/letsencrypt/live/ipaddr.tools/fullchain.pem",
         keyfile: "/etc/letsencrypt/live/ipaddr.tools/privkey.pem",
       ]),
 
       # HTTP server specification
-      Plug.Cowboy.child_spec(scheme: :http, plug: Ipaddr.Router, options: [port: 80]),
+      Plug.Cowboy.child_spec(scheme: :http, plug: Ipaddr.Router, options: [port: 8080]),
     ]
 
     opts = [strategy: :one_for_one, name: Ipaddr.Supervisor]
