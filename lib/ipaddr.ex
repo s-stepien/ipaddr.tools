@@ -1,4 +1,3 @@
 defmodule Ipaddr do
-  @moduledoc """
-  """
+  @moduledoc false
 end

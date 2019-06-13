@@ -1,6 +1,5 @@
 defmodule Ipaddr.Http.Template do
-  @moduledoc """
-  """
+  @moduledoc false
 
   require Slime
 
