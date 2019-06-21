@@ -102,6 +102,14 @@ html
             |
               $ http #{params.host}/coordinates
               #{params.data.latitude},#{params.data.longitude}
+        h2 Database's build timestamp lookup
+        pre
+          |
+            $ curl #{params.host}/db/country/build
+            1560284606
+
+            $ curl #{params.host}/db/city/build
+            1560284689
       .pure-u-1.pure-u-md-1-2
         h2 JSON output
         pre

@@ -18,6 +18,8 @@ defmodule Ipaddr.Router do
   get "/coordinates", to: Ipaddr.Http.Coordinates
   get "/port/:port",  to: Ipaddr.Http.Port
 
+  get "/db/:id/build",    to: Ipaddr.Http.Db
+
   get "/test",        to: Ipaddr.Http.Test
 
   match _ do
