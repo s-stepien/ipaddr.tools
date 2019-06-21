@@ -23,6 +23,6 @@ defmodule Ipaddr.Router do
   get "/test",        to: Ipaddr.Http.Test
 
   match _ do
-    send_resp(conn, 404, "Not found")
+    send_resp(conn, 404, "Not found\n")
   end
 end
