@@ -27,12 +27,12 @@ See [Configuration](#configuration).
 
 4. Run!
 ```
-mix run --no-halt
+MIX_ENV=prod mix run --no-halt
 ```
 
 or
 ```
-iex -S mix
+MIX_ENV=prod iex -S mix
 ```
 
 The application will start listening on ports: 8080 (HTTP) and 8433 (HTTPS).
