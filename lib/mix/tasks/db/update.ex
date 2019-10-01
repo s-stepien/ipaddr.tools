@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Ipaddr.Db.Update do
   use Mix.Task
 
-  @shortdoc "Updates the geolocation databases and reloads them"
+  @shortdoc "Updates the geolocation databases"
   @moduledoc """
   This task will install the newest available geolocation databases.
   To reaload the databases type Geolix.reload_databases() in application iex shell.
