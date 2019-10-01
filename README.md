@@ -117,7 +117,10 @@ stopping the application by running:
 mix ipaddr.db.update
 ```
 
-This will download the newest databases from the MaxMind site, and will reload
-it inside the running application.
+This will download the newest databases from the MaxMind site. Then reload the
+database in the running application by typing:
+```
+Geolix.reload_databases()
+```
 
 Note: the reload will finish after some slight delay (see [Geolix docs](https://hexdocs.pm/geolix/readme.html#reloading)).
