@@ -114,12 +114,6 @@ commented.
 If you wish to update the geolocation databases, you can do that without
 stopping the application by running:
 ```
-mix ipaddr.db.update
-```
-
-This will download the newest databases from the MaxMind site. Then reload the
-database in the running application by typing:
-```
 Geolix.reload_databases()
 ```
 
