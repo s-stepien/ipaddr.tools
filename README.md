@@ -44,7 +44,8 @@ correctly.
 
 ### SSL certificates
 
-This application uses by default HTTPS, so correct SSL certificates are needed.
+This application can use HTTPS. Correct SSL certificates are needed in that
+case.
 I think that the simples way to get the certificates is by using the
 [certbot](https://certbot.eff.org/) for [Let's
 Encrypt](https://letsencrypt.org/). Check them out - it is easy!
@@ -58,19 +59,20 @@ not work.
 #### SSL certificates configuration
 
 You need to enter the paths to certificate file and private key file inside
-`lib/ipaddr/application.ex` file:
+`config/config.exs` configuration file:
 
 ```
-Plug.Cowboy.child_spec(scheme: :https, plug: Ipaddr.Router, options: [
-  port: 8443,
-  certfile: "/etc/letsencrypt/live/ipaddr.tools/fullchain.pem",
-  keyfile: "/etc/letsencrypt/live/ipaddr.tools/privkey.pem",
-]),
+    %{
+      id: "https",
+      enable: false,
+      port: 8443,
+      certfile: "/etc/letsencrypt/live/ipaddr.tools/fullchain.pem",
+      keyfile: "/etc/letsencrypt/live/ipaddr.tools/privkey.pem",
+    },
 ```
 
-Change the paths for values: `certfile` and `keyfile`.
-
-If you do not need HTTPS support, remove or comment the whole code from above.
+Change the paths for values: `certfile` and `keyfile`. Remember also to change
+the `enable` value to `true` (by default the HTTPS server is disabled).
 
 ### Working behind proxy
 
