@@ -118,6 +118,9 @@ html
 
             $ curl #{params.host}/db/city/build
             1560284689
+
+            $ curl #{params.host}/db/asn/build
+            1569928193
       .pure-u-1.pure-u-md-1-2
         h2 JSON output
         pre
