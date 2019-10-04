@@ -5,6 +5,7 @@ defmodule Ipaddr.Http.Ip do
   import Ipaddr.Common.Ip
   import Ipaddr.Common.Geo
   import Ipaddr.Common.Conn
+  import Ipaddr.Common.UserAgent
 
   @doc """
   This function will init this plug with opts.
@@ -14,7 +15,9 @@ defmodule Ipaddr.Http.Ip do
     opts
   end
 
-  defp build_response(remote_ip) do
+  defp build_response(conn) do
+    remote_ip = conn.remote_ip
+
     data = %{
       ip: ip_to_string!(remote_ip),
       ip_decimal: ip_to_decimal(remote_ip),
@@ -60,6 +63,13 @@ defmodule Ipaddr.Http.Ip do
         data
     end
 
+    data = case lookup_user_agent(conn) do
+      {:ok, user_agent} ->
+        Map.put(data, :user_agent, user_agent)
+      _  ->
+        data
+    end
+
     case :inet.gethostbyaddr(remote_ip) do
       {:ok, {:hostent, hostname, _, _, _, _}} ->
         Map.put(data, :hostname, to_string(hostname))
@@ -95,7 +105,7 @@ defmodule Ipaddr.Http.Ip do
   end
 
   defp call_json(conn) do
-    conn.remote_ip
+    conn
     |> build_response()
     |> response_to_json()
     |> send_json(conn)
@@ -104,7 +114,7 @@ defmodule Ipaddr.Http.Ip do
   defp call_html(conn) do
     conn = put_resp_content_type(conn, "text/html")
 
-    with {:ok, data} <- conn.remote_ip
+    with {:ok, data} <- conn
                         |> build_response()
                         |> build_template_data(conn.host) do
       send_resp(conn, 200, Ipaddr.Http.Template.generate(data))
