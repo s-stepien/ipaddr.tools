@@ -15,7 +15,6 @@ git clone git@github.com:s-stepien/ipaddr.tools.git
 cd ipaddr.tools
 mix deps.get
 mix compile
-mix ipaddr.db.install
 ```
 
 This product includes GeoLite2 data created by MaxMind, available from
