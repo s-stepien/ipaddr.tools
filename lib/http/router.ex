@@ -16,6 +16,7 @@ defmodule Ipaddr.Router do
   get "/country-iso", to: Ipaddr.Http.Country
   get "/city",        to: Ipaddr.Http.City
   get "/coordinates", to: Ipaddr.Http.Coordinates
+  get "/asn",         to: Ipaddr.Http.Asn
   get "/port/:port",  to: Ipaddr.Http.Port
 
   get "/db/:id/build",    to: Ipaddr.Http.Db

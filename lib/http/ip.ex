@@ -46,6 +46,20 @@ defmodule Ipaddr.Http.Ip do
         data
     end
 
+    data = case lookup_asn(remote_ip) do
+      {:ok, asn} ->
+        Map.put(data, :asn, asn)
+      _ ->
+        data
+    end
+
+    data = case lookup_aso(remote_ip) do
+      {:ok, aso} ->
+        Map.put(data, :aso, aso)
+      _ ->
+        data
+    end
+
     case :inet.gethostbyaddr(remote_ip) do
       {:ok, {:hostent, hostname, _, _, _, _}} ->
         Map.put(data, :hostname, to_string(hostname))

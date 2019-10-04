@@ -7,7 +7,7 @@ defmodule Helper do
   def loop() do
     receive do
       :check ->
-        if length(Geolix.Database.Loader.loaded_databases()) == 2 do
+        if length(Geolix.Database.Loader.loaded_databases()) == 3 do
           IO.puts("done")
           ExUnit.start()
         else

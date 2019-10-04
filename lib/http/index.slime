@@ -96,6 +96,14 @@ html
             |
               $ http #{params.host}/city
               #{params.data.city}
+        = if Map.has_key?(params.data, :asn) do
+          h2 ASN lookup
+          pre
+            |
+              $ http #{params.host}/asn
+              #{params.data.asn}
+          = if Map.has_key?(params.data, :aso) do
+            p Looks like you're with #{params.data.aso}
         = if Map.has_key?(params.data, :latitude) and Map.has_key?(params.data, :longitude) do
           h2 Location lookup
           pre

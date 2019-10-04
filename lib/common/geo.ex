@@ -84,4 +84,54 @@ defmodule Ipaddr.Common.Geo do
     |> Geolix.lookup(where: :country)
     |> parse_country()
   end
+
+  defp parse_asn(nil), do: {:error, "Result is nil"}
+  defp parse_asn(%Geolix.Adapter.MMDB2.Result.ASN{autonomous_system_number: asn} = _c) when is_nil(asn), do: {:error, "Problem getting asn record"}
+  defp parse_asn(%Geolix.Adapter.MMDB2.Result.ASN{autonomous_system_number: asn} = _c) do
+    {:ok, "AS" <> Integer.to_string(asn)}
+  end
+
+  @doc """
+  Translate ip address to ASN number.
+
+  The data is taken from MMDB2 database.
+  The app's config/config.exs is responsible for setting the database files paths.
+
+  ## Examples
+
+  iex> Ipaddr.Common.Geo.lookup_asn({23,22,39,120})
+  {:ok, "AS14618"}
+
+  """
+  @spec lookup_asn(:inet.ip_address) :: {:ok, String.t} | {:error, String.t}
+  def lookup_asn(ip) do
+    ip
+    |> Geolix.lookup(where: :asn)
+    |> parse_asn()
+  end
+
+  defp parse_aso(nil), do: {:error, "Result is nil"}
+  defp parse_aso(%Geolix.Adapter.MMDB2.Result.ASN{autonomous_system_organization: aso} = _c) when is_nil(aso), do: {:error, "Problem getting aso record"}
+  defp parse_aso(%Geolix.Adapter.MMDB2.Result.ASN{autonomous_system_organization: aso} = _c) do
+    {:ok, aso}
+  end
+
+  @doc """
+  Translate ip address to ASN organization.
+
+  The data is taken from MMDB2 database.
+  The app's config/config.exs is responsible for setting the database files paths.
+
+  ## Examples
+
+  iex> Ipaddr.Common.Geo.lookup_aso({23,22,39,120})
+  {:ok, "Amazon.com, Inc."}
+
+  """
+  @spec lookup_aso(:inet.ip_address) :: {:ok, String.t} | {:error, String.t}
+  def lookup_aso(ip) do
+    ip
+    |> Geolix.lookup(where: :asn)
+    |> parse_aso()
+  end
 end
