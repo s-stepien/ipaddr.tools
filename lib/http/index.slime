@@ -38,6 +38,14 @@ html lang="en-US"
         });
       });
 
+      ["country", "city", "asn"].forEach((id, _i) => {
+        fetch(`db/${id}/build`).then(response => {
+          response.text().then(text => {
+            document.getElementById(`${id}_epoch`).innerHTML = text;
+          });
+        });
+      });
+
   body
     .pure-g
       .pure-u-1-1
@@ -114,13 +122,13 @@ html lang="en-US"
         pre
           |
             $ curl #{params.host}/db/country/build
-            1560284606
+            <span id="country_epoch">checking...</span>
 
             $ curl #{params.host}/db/city/build
-            1560284689
+            <span id="city_epoch">checking...</span>
 
             $ curl #{params.host}/db/asn/build
-            1569928193
+            <span id="asn_epoch">checking...</span>
       .pure-u-1.pure-u-md-1-2
         h2 JSON output
         pre
