@@ -14,7 +14,8 @@ defmodule Ipaddr.Http.Db do
   end
 
   defp get_build_epoch({:ok, id}) do
-    {:ok, "#{Geolix.Adapter.MMDB2.Storage.Metadata.get(id).build_epoch}"}
+    {%MMDB2Decoder.Metadata{build_epoch: epoch}, _, _} = Geolix.Adapter.MMDB2.Storage.get(id)
+    {:ok, "#{epoch}"}
   end
 
   defp get_build_epoch({:error, reason}) do
