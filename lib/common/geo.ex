@@ -125,7 +125,7 @@ defmodule Ipaddr.Common.Geo do
   ## Examples
 
   iex> Ipaddr.Common.Geo.lookup_aso({23,22,39,120})
-  {:ok, "Amazon.com, Inc."}
+  {:ok, "AMAZON-AES"}
 
   """
   @spec lookup_aso(:inet.ip_address) :: {:ok, String.t} | {:error, String.t}
