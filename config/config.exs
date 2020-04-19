@@ -21,16 +21,16 @@ config :geolix,
     %{
       id: :city,
       adapter: Geolix.Adapter.MMDB2,
-      source: "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz",
+      source: "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=YOUR_KEY_HERE&suffix=tar.gz",
     },
     %{
       id: :country,
       adapter: Geolix.Adapter.MMDB2,
-      source: "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz",
+      source: "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=YOUR_KEY_HERE&suffix=tar.gz",
     },
     %{
       id: :asn,
       adapter: Geolix.Adapter.MMDB2,
-      source: "http://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz",
+      source: "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=YOUR_KEY_HERE&suffix=tar.gz",
     },
   ]
