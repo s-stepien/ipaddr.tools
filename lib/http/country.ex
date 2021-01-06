@@ -15,7 +15,7 @@ defmodule Ipaddr.Http.Country do
   end
 
   @doc """
-  This function will generate the response to given conn when the route path is /country-iso.
+  This function will generate the response to given conn.
   """
   @spec call(Plug.Conn.t, list) :: Plug.Conn.t
   def call(%Plug.Conn{request_path: "/country-iso"} = conn, _opts) do
@@ -27,9 +27,6 @@ defmodule Ipaddr.Http.Country do
     end
   end
 
-  @doc """
-  This function will generate the response to given conn.
-  """
   @spec call(Plug.Conn.t, list) :: Plug.Conn.t
   def call(conn, _opts) do
     case lookup_country(conn.remote_ip) do

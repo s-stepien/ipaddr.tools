@@ -40,12 +40,15 @@ defmodule Ipaddr.Common.Ip do
   end
 
   @doc """
-  Translate ipv4 address to decimal value.
+  Translate ipv4 or ipv6 address to decimal value.
 
   ## Examples
 
       iex> Ipaddr.Common.Ip.ip_to_decimal({78,11,8,249})
       1309346041
+
+      iex> Ipaddr.Common.Ip.ip_to_decimal({8193,18528,18528,0,0,0,0,34952})
+      42541956123769884636017138956568135816
 
   """
   @spec ip_to_decimal(:inet.ip4_address) :: number
@@ -54,15 +57,6 @@ defmodule Ipaddr.Common.Ip do
     i
   end
 
-  @doc """
-  Translate ipv6 address to decimal value.
-
-  ## Examples
-
-      iex> Ipaddr.Common.Ip.ip_to_decimal({8193,18528,18528,0,0,0,0,34952})
-      42541956123769884636017138956568135816
-
-  """
   @spec ip_to_decimal(:inet.ip6_address) :: number
   def ip_to_decimal({o1, o2, o3, o4, o5, o6, o7, o8}) do
     <<i :: big-integer-size(128)>> = <<o1 :: big-integer-size(16), o2 :: big-integer-size(16), o3 :: big-integer-size(16), o4 :: big-integer-size(16), o5 :: big-integer-size(16), o6 :: big-integer-size(16), o7 :: big-integer-size(16), o8 :: big-integer-size(16)>>

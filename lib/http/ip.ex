@@ -131,14 +131,13 @@ defmodule Ipaddr.Http.Ip do
   end
 
   @doc """
+  This function will generate the response to given conn.
   """
   @spec call(Plug.Conn.t, list) :: Plug.Conn.t
   def call(%Plug.Conn{request_path: "/json"} = conn, _opts) do
     call_json(conn)
   end
 
-  @doc """
-  """
   @spec call(Plug.Conn.t, list) :: Plug.Conn.t
   def call(%Plug.Conn{request_path: "/"} = conn, _opts) do
     accepts = case get_req_header(conn, "accept") do
@@ -158,8 +157,6 @@ defmodule Ipaddr.Http.Ip do
     end
   end
 
-  @doc """
-  """
   @spec call(Plug.Conn.t, list) :: Plug.Conn.t
   def call(conn, _opts) do
     call_plain(conn)

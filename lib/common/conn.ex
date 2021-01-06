@@ -29,7 +29,7 @@ defmodule Ipaddr.Common.Conn do
 
   @doc """
   Send json as the response to the conn.
-  This function will set correct content type and HTTP code (200).
+  This function will set correct content type and HTTP code.
   """
   @spec send_json({:ok, String.t}, Plug.Conn.t) :: Plug.Conn.t
   def send_json({:ok, json}, conn) do
@@ -38,10 +38,6 @@ defmodule Ipaddr.Common.Conn do
     |> send_resp(200, json)
   end
 
-  @doc """
-  Send error response encoded in json for conn.
-  This function will set correct content type and HTTP code (500).
-  """
   @spec send_json({:error, String.t}, Plug.Conn.t) :: Plug.Conn.t
   def send_json({:error, reason}, conn) do
     conn
@@ -51,7 +47,7 @@ defmodule Ipaddr.Common.Conn do
 
   @doc """
   Send plain text as response to conn.
-  This function will set correct content type and HTTP code (200).
+  This function will set correct content type and HTTP code.
   """
   @spec send_plain({:ok, String.t}, Plug.Conn.t) :: Plug.Conn.t
   def send_plain({:ok, text}, conn) do
@@ -60,10 +56,6 @@ defmodule Ipaddr.Common.Conn do
     |> send_resp(200, text <> "\n")
   end
 
-  @doc """
-  Send plain error message as response to conn.
-  This function will set correct content type and HTTP code (500).
-  """
   @spec send_plain({:error, String.t}, Plug.Conn.t) :: Plug.Conn.t
   def send_plain({:error, reason}, conn) do
     conn
