@@ -41,6 +41,13 @@ The application will start listening on ports: 8080 (HTTP) and 8433 (HTTPS).
 Before you can run this application you need to make some effort to configure it
 correctly.
 
+### GeoLite2 databases access
+
+You need to create an account on
+[https://www.maxmind.com](https://www.maxmind.com). Only then you can receive a
+free license key that is needed to download the databases. Put your licence key
+in the `config/config.exs` file (replace `YOUR_KEY_HERE` with your key).
+
 ### SSL certificates
 
 This application can use HTTPS. Correct SSL certificates are needed in that
