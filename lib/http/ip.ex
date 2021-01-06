@@ -146,11 +146,11 @@ defmodule Ipaddr.Http.Ip do
   defp call_html(conn) do
     conn = put_resp_content_type(conn, "text/html")
 
-    with {:ok, data} <- conn
-                        |> build_response()
-                        |> build_template_data(conn.host) do
-      send_resp(conn, 200, Ipaddr.Http.Template.generate(data))
-    else
+    case conn
+         |> build_response()
+         |> build_template_data(conn.host) do
+      {:ok, data} ->
+        send_resp(conn, 200, Ipaddr.Http.Template.generate(data))
       {:error, reason} ->
         send_resp(conn, 500, "Internal server error #{reason}")
     end
