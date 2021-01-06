@@ -35,7 +35,7 @@ defmodule Ipaddr.MixProject do
       {:slime, git: "https://github.com/slime-lang/slime"},
       #{:remote_ip, "~> 0.1.0"},
       {:benchee, "~> 1.0", only: [:dev, :test]},
-      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.6", only: [:dev, :test], runtime: false},
     ]
   end
