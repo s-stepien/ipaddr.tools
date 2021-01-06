@@ -9,12 +9,11 @@ This is the software that runs the https://ipaddr.tools site.
 git clone git@github.com:s-stepien/ipaddr.tools.git
 ```
 
-2. Install needed dependencies and databases.
+2. Install needed dependencies
 
 ```
 cd ipaddr.tools
-mix deps.get
-mix compile
+MIX_ENV=prod mix deps.get
 ```
 
 This product includes GeoLite2 data created by MaxMind, available from
