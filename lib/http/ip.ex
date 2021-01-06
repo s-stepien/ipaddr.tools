@@ -15,15 +15,15 @@ defmodule Ipaddr.Http.Ip do
     opts
   end
 
-  defp build_response(conn) do
-    remote_ip = conn.remote_ip
+  defp build_response_add_ip(data, conn) do
+    data
+    |> Map.put(:ip, ip_to_string!(conn.remote_ip))
+    |> Map.put(:ip_decimal, ip_to_decimal(conn.remote_ip))
+  end
 
-    data = %{
-      ip: ip_to_string!(remote_ip),
-      ip_decimal: ip_to_decimal(remote_ip),
-    }
-
-    data = case lookup_country(remote_ip) do
+  defp build_response_add_country(data, conn)
+  do
+    case lookup_country(conn.remote_ip) do
       {:ok, country, country_eu, country_iso} ->
         data
         |> Map.put(:country, country)
@@ -32,15 +32,21 @@ defmodule Ipaddr.Http.Ip do
       _ ->
         data
     end
+  end
 
-    data = case lookup_city(remote_ip) do
+  defp build_response_add_city(data, conn)
+  do
+    case lookup_city(conn.remote_ip) do
       {:ok, city} ->
         Map.put(data, :city, city)
       _ ->
         data
     end
+  end
 
-    data = case lookup_location(remote_ip) do
+  defp build_response_add_location(data, conn)
+  do
+    case lookup_location(conn.remote_ip) do
       {:ok, latitude, longitude} ->
         data
         |> Map.put(:latitude, latitude)
@@ -48,34 +54,60 @@ defmodule Ipaddr.Http.Ip do
       _ ->
         data
     end
+  end
 
-    data = case lookup_asn(remote_ip) do
+  defp build_response_add_asn(data, conn)
+  do
+    case lookup_asn(conn.remote_ip) do
       {:ok, asn} ->
         Map.put(data, :asn, asn)
       _ ->
         data
     end
+  end
 
-    data = case lookup_aso(remote_ip) do
+  defp build_response_add_aso(data, conn)
+  do
+    case lookup_aso(conn.remote_ip) do
       {:ok, aso} ->
         Map.put(data, :aso, aso)
       _ ->
         data
     end
+  end
 
-    data = case lookup_user_agent(conn) do
+  defp build_response_add_user_agent(data, conn)
+  do
+    case lookup_user_agent(conn) do
       {:ok, user_agent} ->
         Map.put(data, :user_agent, user_agent)
       _  ->
         data
     end
+  end
 
-    case :inet.gethostbyaddr(remote_ip) do
+  defp build_response_add_hostname(data, conn)
+  do
+    case :inet.gethostbyaddr(conn.remote_ip) do
       {:ok, {:hostent, hostname, _, _, _, _}} ->
         Map.put(data, :hostname, to_string(hostname))
       _ ->
         data
     end
+  end
+
+  defp build_response(conn) do
+    data = %{}
+
+    data
+    |> build_response_add_ip(conn)
+    |> build_response_add_country(conn)
+    |> build_response_add_city(conn)
+    |> build_response_add_location(conn)
+    |> build_response_add_asn(conn)
+    |> build_response_add_aso(conn)
+    |> build_response_add_user_agent(conn)
+    |> build_response_add_hostname(conn)
   end
 
   defp build_template_data(response, host) do
