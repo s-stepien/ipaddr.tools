@@ -30,7 +30,7 @@ defmodule Ipaddr.MixProject do
     [
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.1"},
-      {:geolix, "~> 1.0.0"},
+      {:geolix, "~> 2.0.0"},
       {:geolix_adapter_mmdb2, git: "https://github.com/elixir-geolix/adapter_mmdb2.git"},
       {:slime, git: "https://github.com/slime-lang/slime"},
       #{:remote_ip, "~> 0.1.0"},
