@@ -40,8 +40,6 @@ defmodule Ipaddr.Application do
   """
   @spec start(Application.start_type, start_args :: term) :: {:ok, pid} | {:ok, pid, Application.state} | {:error, reason :: term}
   def start(_type, _args) do
-    Ipaddr.Database.wait_until_ready()
-
     config = Application.get_env(:ipaddr, :servers, [])
 
     children =
