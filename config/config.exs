@@ -17,6 +17,7 @@ config :ipaddr,
   ]
 
 config :geolix,
+  startup_sync: true,
   databases: [
     %{
       id: :city,
